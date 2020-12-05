@@ -98,10 +98,8 @@ details > details > summary {
 .content {
     padding: 1em 10%;
     border-radius: 25px;
+    overflow: hidden;
 }
-
-
-.btn {}
 
 .success {
     color: white;
