@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>promptJS</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/2.0.3/pure-min.css">
+    <link rel="stylesheet" href="./statis/index.css">
+    <link rel="stylesheet" href="./statis/default.min.css">
+</head>
+
+<body>
+    <div class="splash-container">
+        <div class="splash">
+            <h1 class="splash-head">promptJS</h1>
+            <p class="splash-subhead">
+                4.55KB - 一个小而实用的JS提示插件
+            </p>
+            <p>
+                <a href="#total" class="pure-button pure-button-primary">观看演示</a>
+                <a href="#install" class="pure-button pure-button-primary">安装插件</a>
+            </p>
+        </div>
+    </div>
+    <div class="content-wrapper">
+        <div class="content" id="total">
+            <h1>演示！</h1>
+            <fieldset>
+                <legend>
+                    <h2>基本功能</h2><span>全端兼容，即插即用</span>
+                </legend>
+                <div class="list">
+                    <div>
+                        <h3>初始化插件</h3>
+                        <pre><code>var p = loadPrompt()</code></pre>
+                    </div>
+                    <div>
+                        <button class="pure-button success" onclick="p.success('成功:D')">成功提示</button>
+                        <details>
+                            <summary>代码</summary>
+                            <pre><code>p.success('成功！')</code></pre>
+                        </details>
+                    </div>
+                    <div>
+                        <button class="pure-button warn" onclick="p.warn('危险:|')">危险提示</button>
+                        <details>
+                            <summary>代码</summary>
+                            <pre><code>p.warn('危险:|')</code></pre>
+                        </details>
+                    </div>
+                    <div>
+                        <button class="pure-button error" onclick="p.error('失败:(')">失败提示</button>
+                        <details>
+                            <summary>代码</summary>
+                            <pre><code>p.error('失败:('</code></pre>
+                        </details>
+                    </div>
+                    <div>
+                        <button class="pure-button inform" onclick="p.inform('信息')">信息提示</button>
+                        <details>
+                            <summary>代码</summary>
+                            <pre><code>p.inform('信息')</code></pre>
+                        </details>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>
+                    <h2>进阶功能</h2><span>简单易用</span>
+                </legend>
+                <div class="list">
+                    <div>
+                        <button class="pure-button" onclick="var m = p.inform('把鼠标移过来试试',true)">开启常驻提示</button>
+                        <details>
+                            <summary>代码</summary>
+                            <pre><code>var m = p.inform('把鼠标移过来试试',true)</code></pre>
+                            <span>不想要抖动？使用以下代码关闭
+                                <pre><code>// 关闭特定标签的抖动效果
+m.noShake()
+// 停止使用抖动效果
+p.config.shake = false</code></pre>
+                            </span>
+                        </details>
+                    </div>
+                    <div>
+                        <button class="pure-button" onclick="p.clean()">清除所有提示</button>
+                        <details>
+                            <summary>代码</summary>
+                            <pre><code>p.clean()</code></pre>
+                        </details>
+                    </div>
+                    <div>
+                        <button class="pure-button" onclick="var m = p.warn('再过两秒我就会变！',true);setTimeout(function(){m.modify('两秒后消失~');setTimeout(function(){m.remove()},2000)},2000)">修改提示内容</button>
+                        <details>
+                            <summary>代码</summary>
+                            <pre><code>
+var m = p.warn('再过两秒我就会变！',true);
+    setTimeout(function(){
+        m.modify('两秒后消失~');
+        setTimeout(function(){
+            m.remove()
+    },2000)
+},2000)
+                            </code></pre>
+                        </details>
+                    </div>
+                    <div>
+                        <button class="pure-button" onclick="change()">改变提示类型</button>
+                        <details>
+                            <summary>代码</summary>
+                            <pre><code>
+var m = p.error('再等两秒钟，马上就好！',true);
+setTimeout(function(){
+    m.switch('success');
+    m.modify('我好了～')
+    setTimeout(function(){
+        m.remove()
+    },2000)
+},2000)
+                            </code></pre>
+                            <script>
+                                var change = function() {
+                                    var m = p.error('再等两秒钟，马上就好！', true);
+                                    setTimeout(function() {
+                                        m.switch('success');
+                                        m.modify('我好了～')
+                                        setTimeout(function() {
+                                            m.remove()
+                                        }, 2000)
+                                    }, 2000)
+                                }
+
+                            </script>
+                        </details>
+                    </div>
+                    <div>
+                        <button class="pure-button" onclick="clickEvent()">添加点击事件</button>
+                        <details>
+                            <summary>代码</summary>
+                            <pre><code>
+var m = p.inform('点我消失',true);
+m.click(function(){m.remove()})
+                            </code></pre>
+                            <script>
+                                var clickEvent = function() {
+                                    var m = p.inform('点我关闭提示', true);
+                                    m.click(function() {
+                                        m.remove()
+                                    })
+                                }
+
+                            </script>
+                        </details>
+                    </div>
+                </div>
+            </fieldset>
+            <hr>
+            <fieldset>
+                <legend>
+                    <h2 id="install">使用方法：</h2>
+                </legend>
+                <div class="list">
+                    <div>
+                        <ol>
+                            <li>
+                                <h3>下载prompt.min.js</h3>
+                            </li>
+                            <li>
+                                <h3>直接引入prompt.min.js，无需引入css文件</h3>
+                                <pre><code>&lt;script src="path/to/prompt.min.js"&gt;&lt;/script&gt;</code></pre>
+                            </li>
+                        </ol>
+                        <h2>你也可以把css与js分开引入：</h2>
+                        <ol>
+                            <li>
+                                <h3>下载prompt.js和prompt.css</h3>
+                            </li>
+                            <li>
+                                <h3>引入prompt.js和prompt.css</h3>
+                                <pre><code>&lt;link rel="stylesheet" href="path/to/prompt.css"&gt;
+&lt;script src="path/to/prompt.js"&gt;&lt;/script&gt;
+</code></pre>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </fieldset>
+            <hr>
+            <fieldset>
+                <legend>
+                    <h2>API说明</h2>
+                </legend>
+                <div class="list">
+                    <div>
+                        <h3>初始化插件</h3>
+                        <pre><code>var p = loadPrompt(node)</code></pre>
+                        <p><code>node</code>为插件的根目录，默认为<code>document</code>。用途：tag</p>
+                    </div>
+                    <div>
+                        <h3>功能列表</h3>
+                        <pre><code>clean: 方法，清除所有正在显示的提示
+config: 字典，插件功能配置
+error: 方法，错误提示
+inform: 方法，信息提示
+success: 方法，成功提示
+warn: 方法，危险提示
+</code></pre>
+                        <p>调用：<code>p.功能</code></p>
+                    </div>
+                    <div>
+                        <h3>提示功能</h3>
+                        <pre><code>p.inform(content, isKeep) // 例子</code></pre>
+                        <p><strong>content:</strong>提示内容，可以传入string（使用innerHTML写入）和node。</p>
+                        <p><strong>isKeep:</strong>控制提示是否常驻。若为<code>true</code>，则返回<code>提示操作列表</code></p>
+                    </div>
+                    <div>
+                        <h3>提示操作列表</h3>
+                        <pre><code>var m = p.inform(123, true) // 例子
+m{
+click: 方法，传入点击事件所调用的方法。
+modify: 方法，修改提示内容，
+        与content选项相同。
+noShake: 方法，关闭抖动。
+node: 提示的DOM树。
+remove: 方法，移除提示。
+switch: 方法，更改提示类型,
+        如m.switch("inform")。
+}</code></pre>
+                    </div>
+                    <div>
+                        <h3>插件功能配置</h3>
+                        <pre><code>p.config{
+classList: 列表，各提示对应的样式
+            为switch选项服务。
+displayTime: 数字，提示持续显示的毫秒数。
+errorModel: DOM，提示模板
+informModel: DOM，提示模板
+shake: 布尔值，控制提示是否抖动。
+successModel: DOM，提示模板
+warnModel: DOM，提示模板
+}</code></pre>
+                        <p><strong>关于模板：</strong>创建模板的方法见源码。</p>
+                    </div>
+                </div>
+            </fieldset>
+            <p><strong>IE9：</strong>需要引入classlist的polyfill，<a target="_blank" href="https://gist.github.com/aMarCruz/31255d2afa5ce91a3acb">Github链接</a></p>
+        </div>
+    </div>
+    <script src="./src/prompt.min.js"></script>
+    <script src="./statis/highlight.min.js"></script>
+    <script>
+        var p = loadPrompt();
+        var f = function() {
+            console.log(123)
+        }
+        var $ = function(selector) {
+            return document.querySelector(selector)
+        }
+        window.onload = function() {
+            wrapper = $(".content-wrapper")
+
+            document.addEventListener("scroll", function() {
+                if (window.scrollY < window.innerHeight - 150) {
+                    wrapper.style.borderRadius = "25px";
+                } else {
+                    wrapper.style.borderRadius = "0px";
+                }
+            })
+        }
+
+    </script>
+    <script>
+        hljs.initHighlightingOnLoad();
+
+    </script>
+</body>
+
+</html>
